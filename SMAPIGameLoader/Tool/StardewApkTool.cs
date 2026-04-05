@@ -53,7 +53,7 @@ internal static class StardewApkTool
             {
                 var version = CurrentPackageInfo.VersionName;
                 var splitApks = CurrentPackageInfo.ApplicationInfo?.SplitSourceDirs;
-                return splitApks?.Count == 2;
+                return CurrentPackageInfo != null;
             }
 
             //samsung
@@ -73,7 +73,7 @@ internal static class StardewApkTool
                     return null;
 
                 if (IsGameFromPlayStore)
-                    return CurrentPackageInfo.ApplicationInfo.SplitSourceDirs?.FirstOrDefault(path => path.Contains("split_config.arm64"));
+                    return CurrentPackageInfo.ApplicationInfo.SplitSourceDirs?.FirstOrDefault(path => path.Contains("split_config.arm64")) ?? BaseApkPath;
 
                 // Samsung: assemblies are in the base APK
                 return BaseApkPath;
@@ -97,7 +97,7 @@ internal static class StardewApkTool
 
                 //play store
                 if (IsGameFromPlayStore)
-                    return CurrentPackageInfo.ApplicationInfo.SplitSourceDirs?.First(path => path.Contains("split_content"));
+                    return CurrentPackageInfo.ApplicationInfo.SplitSourceDirs?.FirstOrDefault(path => path.Contains("split_content")) ?? BaseApkPath;
 
                 //samsung
                 return BaseApkPath;
