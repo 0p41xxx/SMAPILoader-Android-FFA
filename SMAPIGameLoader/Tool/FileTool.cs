@@ -15,7 +15,7 @@ namespace SMAPIGameLoader;
 
 internal static class FileTool
 {
-    public static string ExternalFilesDir = Application.Context.GetExternalFilesDir(null).AbsolutePath;
+    public static string ExternalFilesDir = Application.Context.GetExternalFilesDir(null)?.AbsolutePath ?? Application.Context.FilesDir.AbsolutePath;
     public static string InternalFilesDir = Application.Context.FilesDir.AbsolutePath;
     public static string ExternalAppDir = ExternalFilesDir.Substring(0, ExternalFilesDir.Length - 6);
     public static string SafePath(string path)
